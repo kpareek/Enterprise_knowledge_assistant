@@ -9,3 +9,5 @@ rank-bm25>=0.2.2
 sentence-transformers>=3.0.0
 pandas>=2.2.0
 tiktoken>=0.7.0
+rouge-score>=0.1.2
+bert-score>=0.3.13

@@ -3,96 +3,233 @@
     "id": "q1",
     "question": "How many days of annual leave do I accrue per year?",
     "expected_source": "HR_Leave_Policy.pdf",
-    "expected_answer_contains": ["21", "1.75"]
+    "expected_answer_contains": [
+      "21",
+      "1.75"
+    ],
+    "expected_answer": "Employees accrue 21 working days of annual leave per year (1.75 days per month). Unused annual leave carries forward up to 10 days; any excess lapses on March 31."
   },
   {
     "id": "q2",
     "question": "What should I do if my VPN connection keeps timing out?",
     "expected_source": "IT_VPN_Support_Guide.docx",
-    "expected_answer_contains": ["restart", "GlobalProtect"]
+    "expected_answer_contains": [
+      "restart",
+      "GlobalProtect"
+    ],
+    "expected_answer": "If the VPN keeps timing out (\"Connection Timed Out\" error), check the internet connection, confirm the gateway address (vpn.companyinternal.com), and restart the GlobalProtect client service. If the issue persists after two restarts, escalate to the IT Helpdesk (raise a P2 ticket or call ext. 4100)."
   },
   {
     "id": "q3",
     "question": "How much paternity leave is a male employee entitled to?",
     "expected_source": "HR_Leave_Policy.pdf",
-    "expected_answer_contains": ["10", "working days"]
+    "expected_answer_contains": [
+      "10",
+      "working days"
+    ],
+    "expected_answer": "A male employee is entitled to 10 working days of paternity leave, which must be taken within three months of the child's birth."
   },
   {
     "id": "q4",
     "question": "Who is responsible for provisioning a new employee's laptop before their joining date?",
     "expected_source": "Employee_Onboarding_SOP.pptx",
-    "expected_answer_contains": ["IT"]
+    "expected_answer_contains": [
+      "IT"
+    ],
+    "expected_answer": "IT is responsible for provisioning the new employee's laptop, corporate email, and Slack account, 3 days before the joining date, during the Pre-Joining (T-7 to T-1 days) stage."
   },
   {
     "id": "q5",
     "question": "What happens if I don't receive the MFA push notification on my phone?",
     "expected_source": "IT_VPN_Support_Guide.docx",
-    "expected_answer_contains": ["resend", "SMS"]
+    "expected_answer_contains": [
+      "resend",
+      "SMS"
+    ],
+    "expected_answer": "If the MFA push notification isn't received, ensure Okta Verify is installed and time-synced, try \"Resend push\", and if no prompt arrives within 2 minutes, use the backup SMS code."
   },
   {
     "id": "q6",
     "question": "Can unused sick leave be carried forward to next year?",
     "expected_source": "HR_Leave_Policy.pdf",
-    "expected_answer_contains": ["cannot", "no"]
+    "expected_answer_contains": [
+      "cannot",
+      "no"
+    ],
+    "expected_answer": "No, unused sick leave cannot be carried forward to the next year; only annual leave carries forward (up to 10 days). Sick leave and casual leave are not eligible for carry-forward."
   },
   {
     "id": "q7",
     "question": "What is the reimbursement policy for international travel business class upgrades?",
     "expected_source": null,
-    "expected_answer_contains": ["cannot find", "don't have", "no information", "not contain"]
+    "expected_answer_contains": [
+      "cannot find",
+      "don't have",
+      "no information",
+      "not contain"
+    ],
+    "expected_answer": "The available documents do not contain a specific reimbursement policy for business class upgrades on international travel. The Travel and Expense Reimbursement Policy states Business Class requires VP+ approval for flights over 10 hours, but does not address a separate upgrade reimbursement -- check with Finance (expenses@company.com) for this specific scenario."
   },
   {
     "id": "q8",
     "question": "How many days per week can I work remotely?",
     "expected_source": "HR_Remote_Work_Policy_v2.docx",
-    "expected_answer_contains": ["5", "no cap", "discretion"]
+    "expected_answer_contains": [
+      "5",
+      "no cap",
+      "discretion"
+    ],
+    "expected_answer": "Employees in eligible roles may work remotely up to 5 days per week at their discretion; there is no company-wide cap on remote days, though teams may set local in-person collaboration norms."
   },
   {
     "id": "q9",
     "question": "Is MFA required for all corporate accounts or just finance and HR systems?",
     "expected_source": "IT_Password_Security_Policy_v2.pdf",
-    "expected_answer_contains": ["all", "mandatory"]
+    "expected_answer_contains": [
+      "all",
+      "mandatory"
+    ],
+    "expected_answer": "MFA (Okta Verify) is mandatory for all corporate accounts and applications, not just finance and HR systems, effective immediately under the current policy."
   },
   {
     "id": "q10",
     "question": "What is the minimum password length required by IT policy?",
     "expected_source": "IT_Password_Security_Policy_v2.pdf",
-    "expected_answer_contains": ["12"]
+    "expected_answer_contains": [
+      "12"
+    ],
+    "expected_answer": "The minimum password length required is 12 characters (a passphrase)."
   },
   {
     "id": "q11",
     "question": "Who should Support page for a customer-impacting issue on a Dedicated tier deployment?",
     "expected_source": "dsid_0d9cae83ac4945cbb33e9dfd9f8bf6eb__escalation-paths-and-contacts-2026.txt",
-    "expected_answer_contains": ["escalat", "on-call", "oncall"]
+    "expected_answer_contains": [
+      "escalat",
+      "on-call",
+      "oncall"
+    ],
+    "expected_answer": "Support should classify the ticket by severity and page the owning on-call per the routing table -- for a Dedicated tier issue this is typically SRE On-Call (Capacity) for capacity/autoscaling/GPU pool stability problems, via PagerDuty (pd-redwood-sre-capacity). If it meets Sev0/Sev1 criteria, Support should also start a Slack bridge in #incidents immediately."
   },
   {
     "id": "q12",
     "question": "What was the outcome of the Atlas product launch in terms of active users?",
     "expected_source": "Ops_Product_Launch_Retrospective.pptx",
-    "expected_answer_contains": ["40,000", "40000"]
+    "expected_answer_contains": [
+      "40,000",
+      "40000"
+    ],
+    "expected_answer": "The Atlas release reached 40,000 active users within the first 30 days, against a target of 35,000 (114% of target)."
   },
   {
     "id": "q13",
     "question": "What is Northwind's Annual Recurring Revenue (ARR)?",
     "expected_source": "Q3_FY2026_Financial_Report.pdf",
-    "expected_answer_contains": ["82.6"]
+    "expected_answer_contains": [
+      "82.6"
+    ],
+    "expected_answer": "Northwind's Annual Recurring Revenue (ARR) is $82.6M.",
+    "_reference_note": "UNVERIFIED: cites Q3_FY2026_Financial_Report.pdf, which does not exist in data/sample_docs (the budget deck references it but it was never ingested). This figure is taken from the test's own expected_answer_contains, not confirmed against a source document. Add the missing PDF or revise this question."
   },
   {
     "id": "q14",
     "question": "What is the reallocation recommendation to cover the Operations facilities maintenance overrun?",
     "expected_source": "Finance_Q3_Budget_Report.pptx",
-    "expected_answer_contains": ["150", "Engineering"]
+    "expected_answer_contains": [
+      "150",
+      "Engineering"
+    ],
+    "expected_answer": "The recommendation is to reallocate $150K of the Q3 favorable variance from Engineering to Operations to cover the facilities maintenance overrun, pending CFO approval."
   },
   {
     "id": "q15",
     "question": "What is the retention period for security incident records?",
     "expected_source": "Compliance_Records_Retention_Policy.pdf",
-    "expected_answer_contains": ["7 years"]
+    "expected_answer_contains": [
+      "7 years"
+    ],
+    "expected_answer": "Security incident records must be retained for 7 years, per the compliance/audit requirement in the Records Retention Policy."
   },
   {
     "id": "q16",
     "question": "What are the statutory annual leave requirements in Germany?",
     "expected_source": "Global_Employee_Handbook.pdf",
-    "expected_answer_contains": ["24", "28"]
+    "expected_answer_contains": [
+      "24",
+      "28"
+    ],
+    "expected_answer": "Per the Global Employee Handbook's country appendix, Germany's statutory minimum annual leave is 24 working days (company policy provides 28 days)."
+  },
+  {
+    "id": "q17",
+    "question": "Do I need to change my password every 90 days?",
+    "expected_source": "IT_Password_Security_Policy_v2.pdf",
+    "expected_answer_contains": [
+      "removed",
+      "no longer"
+    ],
+    "expected_answer": "No -- the mandatory 90-day password rotation requirement has been removed under the current (v2.0) Password and Account Security Policy and replaced by continuous MFA verification. The 90-day rotation rule from the 2023 (v1.0) policy is no longer in effect and should be disregarded.",
+    "_test_purpose": "Conflict resolution: v1 requires 90-day rotation, v2 explicitly removes it. Tests whether the model gives the CURRENT answer (no) or blends both versions ('some policies say yes, others say no')."
+  },
+  {
+    "id": "q18",
+    "question": "What is the ratio of Northwind Labs' Q3 departmental spend to Northwind Analytics' consolidated Q3 revenue?",
+    "expected_source": null,
+    "expected_answer_contains": [
+      "4.2",
+      "19.8",
+      "21"
+    ],
+    "expected_answer": "Northwind Labs' Q3 departmental spend was $4.2M and Northwind Analytics' consolidated Q3 revenue was $19.8M, giving a ratio of roughly 21% ($4.2M / $19.8M ~= 21%).",
+    "_test_purpose": "Multi-hop arithmetic across two documents: Northwind Labs spend ($4.2M, budget deck) / Northwind Analytics revenue ($19.8M, financial report) = ~21%. Requires retrieving both AND correctly attributing which number came from which entity AND doing the division. Both orgs are named explicitly, so this should NOT trigger the disambiguation clarification -- it's testing arithmetic reasoning, not entity resolution.",
+    "_reference_note": "UNVERIFIED: the $19.8M Northwind Analytics revenue figure cites the same missing Q3_FY2026_Financial_Report.pdf as q13 (the $4.2M Northwind Labs figure IS confirmed, in Finance_Q3_Budget_Report.pptx). Add the missing PDF or revise this question."
+  },
+  {
+    "id": "q19",
+    "question": "What is the maximum dollar allowance for a business class flight upgrade under the Travel and Expense Policy?",
+    "expected_source": null,
+    "expected_answer_contains": [
+      "cannot find",
+      "don't have",
+      "no information",
+      "not specify",
+      "does not specify",
+      "no dollar",
+      "no specific amount"
+    ],
+    "expected_answer": "The Travel and Expense Reimbursement Policy does not specify a maximum dollar allowance for a business class flight upgrade. It states Business Class is permitted (with VP+ approval) for flights over 10 hours, but no specific dollar amount or \"upgrade allowance\" is defined anywhere in the policy.",
+    "_test_purpose": "Hallucination trap, not a real negative case: the policy DOES discuss business class (VP+ approval, flights over 10 hours) but never states a dollar 'upgrade allowance' -- a distinct concept the document doesn't define. Weaker models are tempted to invent a plausible-sounding number since the topic is genuinely covered, just not the specific fact asked about."
+  },
+  {
+    "id": "q20",
+    "question": "What is South Africa's standard work week according to the Global Employee Handbook's country appendix?",
+    "expected_source": "Global_Employee_Handbook.pdf",
+    "expected_answer_contains": [
+      "45"
+    ],
+    "expected_answer": "According to the Global Employee Handbook's country appendix, South Africa's standard work week is 45 hours.",
+    "_test_purpose": "Needle-in-haystack: the country appendix table has 15 structurally similar rows (leave days, notice periods, work weeks). Tests whether reranking + generation correctly pick South Africa's row specifically rather than an adjacent country's similar-looking numbers."
+  },
+  {
+    "id": "q21",
+    "question": "What approval is required for a $30,000 purchase under the Procurement Standard Operating Procedure?",
+    "expected_source": "Finance_Procurement_SOP.pdf",
+    "expected_answer_contains": [
+      "Finance approval",
+      "quotes"
+    ],
+    "expected_answer": "A $30,000 purchase falls in the $10,000-$50,000 tier of the Procurement SOP, which requires Finance approval (in addition to Manager + Department Head approval) and 2 competitive quotes.",
+    "_test_purpose": "Table-band precision: $30,000 falls in the $10,000-$50,000 tier, which requires correctly identifying the right threshold band from a table (not just pattern-matching the literal number '30,000', which doesn't appear anywhere in the source document) and reading off that row's requirements."
+  },
+  {
+    "id": "q22",
+    "question": "If I quit my job, do I get paid for the vacation days I didn't use?",
+    "expected_source": "HR_Leave_Policy.pdf",
+    "expected_answer_contains": [
+      "encashment",
+      "10"
+    ],
+    "expected_answer": "Yes -- upon resignation, unused annual leave is eligible for encashment (up to the 10-day carry-forward cap) at your last drawn basic salary rate, under the Unused Leave Encashment section. Sick and casual leave are not eligible for encashment.",
+    "_test_purpose": "Colloquial-to-formal bridging: 'quit' -> 'resignation', 'vacation days' -> 'annual leave', 'get paid for' -> 'encashment'. Tests whether generation correctly answers using the formally-worded 'Unused Leave Encashment' section despite the casual phrasing, rather than missing the connection."
   }
 ]

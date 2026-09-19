@@ -91,3 +91,14 @@ CONFIDENCE_MEDIUM = 0.55
 # ---------------------------------------------------------------------
 DEPARTMENTS = ["HR", "IT", "Finance", "Operations", "General"]
 SENSITIVITY_LEVELS = ["Public", "Internal", "Confidential"]
+
+# ---------------------------------------------------------------------
+# Evaluation metrics (ROUGE / BERTScore / LLM-as-judge)
+# ---------------------------------------------------------------------
+# CPU-friendly by default -- roberta-large (the bert-score package default)
+# is accurate but slow without a GPU. Swap to a larger model if you have one.
+EVAL_BERTSCORE_MODEL = os.getenv("EVAL_BERTSCORE_MODEL", "distilbert-base-uncased")
+EVAL_BERTSCORE_LANG = os.getenv("EVAL_BERTSCORE_LANG", "en")
+# Judge reuses the same chat model/provider already configured above (RAG_MODE
+# / PROVIDER) so no separate API key is needed.
+EVAL_JUDGE_TEMPERATURE = 0.0

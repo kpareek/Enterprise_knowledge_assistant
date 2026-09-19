@@ -46,6 +46,15 @@ def _find_supported_files(directory: str) -> list[str]:
     return sorted(paths)
 
 
+def _manifest_key(filepath: str) -> str:
+    """Manifest keys are stored relative to the project root (BASE_DIR),
+    not as absolute paths -- config.RAW_DOCS_DIR is built from an absolute
+    BASE_DIR, so file paths from _find_supported_files are absolute, but an
+    absolute-path key would bake this machine's directory layout into a
+    file that's checked into git and read on other machines/checkouts."""
+    return os.path.relpath(filepath, config.BASE_DIR)
+
+
 def run_ingestion(directory: str = config.RAW_DOCS_DIR, reset: bool = False) -> dict:
     t0 = time.time()
     store = VectorStore()
@@ -59,7 +68,7 @@ def run_ingestion(directory: str = config.RAW_DOCS_DIR, reset: bool = False) -> 
         print(f"[INFO] Loaded manifest with {len(manifest)} previously-ingested file(s).")
 
     current_files = _find_supported_files(directory)
-    current_set = set(current_files)
+    current_keys = {_manifest_key(f) for f in current_files}
 
     # Only consider a manifest entry "removed" if it lived inside the
     # directory we're currently scanning -- otherwise ingesting
@@ -68,22 +77,24 @@ def run_ingestion(directory: str = config.RAW_DOCS_DIR, reset: bool = False) -> 
     # directory's files are (correctly) absent from this run's file list.
     directory_abs = os.path.abspath(directory)
     manifest_files_in_scope = {
-        f for f in manifest
-        if os.path.abspath(f).startswith(directory_abs + os.sep) or os.path.abspath(f) == directory_abs
+        key for key in manifest
+        if os.path.abspath(os.path.join(config.BASE_DIR, key)).startswith(directory_abs + os.sep)
+        or os.path.abspath(os.path.join(config.BASE_DIR, key)) == directory_abs
     }
-    removed = manifest_files_in_scope - current_set
-    for filepath in removed:
-        source_name = os.path.basename(filepath)
+    removed = manifest_files_in_scope - current_keys
+    for key in removed:
+        source_name = os.path.basename(key)
         print(f"[INFO] Removing chunks for deleted file: {source_name}")
         store.delete_by_source(source_name)
-        del manifest[filepath]
+        del manifest[key]
 
     new_files, changed_files, skipped_files = [], [], []
     total_chunks_added = 0
 
     for filepath in current_files:
+        key = _manifest_key(filepath)
         h = file_hash(filepath)
-        prior = manifest.get(filepath)
+        prior = manifest.get(key)
 
         if prior is not None and prior.get("hash") == h:
             skipped_files.append(filepath)
@@ -109,7 +120,7 @@ def run_ingestion(directory: str = config.RAW_DOCS_DIR, reset: bool = False) -> 
             store.upsert_chunks(chunks)
             total_chunks_added += len(chunks)
 
-        manifest[filepath] = {"hash": h, **record_entry(len(chunks))}
+        manifest[key] = {"hash": h, **record_entry(len(chunks))}
         print(f"[INFO] {'Re-embedded' if prior else 'Embedded'} {source_name} -> {len(chunks)} chunks")
 
     save_manifest(config.MANIFEST_PATH, manifest)

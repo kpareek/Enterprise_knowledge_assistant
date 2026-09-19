@@ -1,20 +1,17 @@
 Tasks List
 
-1. Presentation PPT - includes Problem statement, solution, Architecture diagram, technologies used,pain areas, Dashboard for success measure -- Dhairya
-2. Historization of chats - Vijay , Kapil -- Done
-3. Weekly execution plan and task owners - Dhairya --Done
-4. Explore react agent - github co pilot - Priority  - Vijay, Kapil 
-5. Rouge score, BERT Score, LLM as Judge -- Ruchi -- Done
-6. hierarchical chunking - multi vector retriever -  Yuvraj, Senthil
+1. Presentation PPT - includes Problem statement, solution, Architecture diagram, technologies used,pain areas, Dashboard for success measure --Dhairya
+2. Historization of chats - Vijay , Kapil
+3. Weekly execution plan and task owners - Dhairya
+4. explore react for UI - github co pilot - Low Priority  - Vijay, Kapil
+5. Rouge score, BERT Score, LLM as Judge -- Yuvraj
+6. hierarchical chunking - other
 7. Evaluate how it works with large document e.g. 200-300pages -- Kapil, Ruchi, Dhairya
-8. Try different LLM models -- Ruchi
-9. Generate large complex documents - Kapil, Ruchi -- on-hold
-10. Future Enhancements -- Done
+8. Try different LLM models 
+9. Generate large complex documents - Kapil, Ruchi
+10. Comparison between different models
+11. Future Enhancements 
 12. Improve the UI and UX of the chatbot - Senthil
-
-
-hybrid search vs multiquery retriver vs multi vector retriever vs parent child retriever 
-multi vector retriever latest
 
 Expected Deliverables
 • Enterprise knowledge chatbot
