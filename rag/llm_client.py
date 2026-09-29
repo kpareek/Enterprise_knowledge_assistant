@@ -6,8 +6,14 @@ change needed to move the whole assistant onto Azure OpenAI.
 from __future__ import annotations
 
 import os
+import re
 
 import config
+
+# Chain-of-thought some reasoning models emit inline (rather than in the
+# separate `reasoning` field). We strip these defensively -- see
+# docs/reasoning_leak_analysis.md for why this matters.
+_THINK_BLOCK_RE = re.compile(r"<think>.*?</think>", re.DOTALL | re.IGNORECASE)
 
 _local_embedder = None
 def get_client():
@@ -60,7 +66,30 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
 RETRY_DEADLINE_SEC = float(os.getenv("LLM_RETRY_DEADLINE_SEC", "300"))
 
 
-def chat_complete(messages, temperature=0.2, max_tokens=800, stop=None) -> str:
+def _clean_content(msg) -> str | None:
+    """Return the user-facing answer from a response message.
+
+    Reasoning models return their chain-of-thought in a SEPARATE `reasoning`
+    field and the clean answer in `content`. But if generation is truncated
+    before the reasoning->answer boundary, the partial reasoning spills into
+    `content` instead (see docs/reasoning_leak_analysis.md). We defend against
+    both shapes: strip any inline <think> blocks, and if `content` is empty but
+    a `reasoning` field is populated, fall back to it so we return something
+    rather than nothing."""
+    content = getattr(msg, "content", None)
+    if content:
+        cleaned = _THINK_BLOCK_RE.sub("", content).strip()
+        if cleaned:
+            return cleaned
+    # content was empty/whitespace -- the model may have spent its whole budget
+    # in the reasoning field; better to surface that than an empty string.
+    reasoning = getattr(msg, "reasoning", None)
+    if reasoning:
+        return _THINK_BLOCK_RE.sub("", reasoning).strip()
+    return content
+
+
+def chat_complete(messages, temperature=0.2, max_tokens=1500, stop=None) -> str:
     import time
     from openai import RateLimitError, APITimeoutError, APIConnectionError, InternalServerError
 
@@ -68,6 +97,13 @@ def chat_complete(messages, temperature=0.2, max_tokens=800, stop=None) -> str:
     # `stop` lets callers (e.g. the ReAct agent) halt generation at a marker
     # like "Observation:" so the model can't hallucinate its own tool output.
     kwargs = {"stop": stop} if stop else {}
+    # Grounded RAG answering doesn't need an extended chain-of-thought, and a
+    # long reasoning trace on the free reasoning model can overrun max_tokens
+    # and spill its unfinished thoughts into `content` (the "reasoning leak" --
+    # see docs/reasoning_leak_analysis.md). Disable the reasoning trace on
+    # OpenRouter so the whole budget goes to the actual answer.
+    if config.RAG_MODE == "free":
+        kwargs["extra_body"] = {"reasoning": {"enabled": False}}
     # Free-tier providers (e.g. OpenRouter's shared :free pool) fail transiently
     # under load: 429 rate limits, slow responses that time out, dropped
     # connections, and 5xx blips. Rather than a fixed retry count (one long
@@ -87,7 +123,7 @@ def chat_complete(messages, temperature=0.2, max_tokens=800, stop=None) -> str:
             # token budget on the hidden reasoning field. Both are transient --
             # treat them like a rate-limit blip and retry within the deadline
             # rather than crashing a whole eval run on one flaky call.
-            content = resp.choices[0].message.content if resp.choices else None
+            content = _clean_content(resp.choices[0].message) if resp.choices else None
             if content:
                 return content
             if time.monotonic() >= deadline:

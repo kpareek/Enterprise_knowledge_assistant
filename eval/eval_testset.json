@@ -141,7 +141,6 @@
       "82.6"
     ],
     "expected_answer": "Northwind's Annual Recurring Revenue (ARR) is $82.6M.",
-    "_reference_note": "UNVERIFIED: cites Q3_FY2026_Financial_Report.pdf, which does not exist in data/sample_docs (the budget deck references it but it was never ingested). This figure is taken from the test's own expected_answer_contains, not confirmed against a source document. Add the missing PDF or revise this question.",
     "category": "standard"
   },
   {
@@ -199,7 +198,6 @@
     ],
     "expected_answer": "Northwind Labs' Q3 departmental spend was $4.2M and Northwind Analytics' consolidated Q3 revenue was $19.8M, giving a ratio of roughly 21% ($4.2M / $19.8M ~= 21%).",
     "_test_purpose": "Multi-hop arithmetic across two documents: Northwind Labs spend ($4.2M, budget deck) / Northwind Analytics revenue ($19.8M, financial report) = ~21%. Requires retrieving both AND correctly attributing which number came from which entity AND doing the division. Both orgs are named explicitly, so this should NOT trigger the disambiguation clarification -- it's testing arithmetic reasoning, not entity resolution.",
-    "_reference_note": "UNVERIFIED: the $19.8M Northwind Analytics revenue figure cites the same missing Q3_FY2026_Financial_Report.pdf as q13 (the $4.2M Northwind Labs figure IS confirmed, in Finance_Q3_Budget_Report.pptx). Add the missing PDF or revise this question.",
     "category": "standard"
   },
   {

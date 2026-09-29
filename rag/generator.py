@@ -172,7 +172,7 @@ def generate_answer(
     user_prompt = f"CONTEXT EXCERPTS:\n\n{context}\n\nQUESTION: {question}"
     messages.append({"role": "user", "content": user_prompt})
 
-    answer_text = chat_complete(messages, temperature=0.2, max_tokens=800)
+    answer_text = chat_complete(messages, temperature=0.2, max_tokens=1500)
 
     top_score = max((c.get("final_score", c.get("score", 0)) for c in chunks), default=0)
     citations = [
